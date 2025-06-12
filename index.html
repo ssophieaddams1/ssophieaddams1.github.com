@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamVibe - Your Ultimate Entertainment Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #ff6b6b;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --text-light: #eee;
+            --accent-color: #0f3460;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%236c63ff;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%23ff6b6b;stop-opacity:0.3" /></linearGradient></defs><rect width="1200" height="600" fill="url(%23grad1)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+            color: white;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(26, 26, 46, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: var(--accent-color);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .about-img {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Recommendations Section */
+        .recommendations-section {
+            padding: 100px 0;
+            background: var(--darker-bg);
+        }
+
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .recommendation-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .recommendation-card .badge {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: var(--accent-color);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: rgba(238, 238, 238, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-bg);
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            width: 4px;
+            height: 4px;
+            background: rgba(108, 99, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-play-circle me-2"></i>StreamVibe</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recommendations">Apps</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="particles">
+            <span class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></span>
+            <span class="particle" style="top: 40%; left: 80%; animation-delay: 1s;"></span>
+            <span class="particle" style="top: 70%; left: 20%; animation-delay: 2s;"></span>
+            <span class="particle" style="top: 30%; left: 60%; animation-delay: 3s;"></span>
+            <span class="particle" style="top: 80%; left: 70%; animation-delay: 4s;"></span>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">Stream Without Limits</h1>
+                    <p class="hero-subtitle">Discover thousands of movies, TV shows, and live content from around the world. Your entertainment journey starts here.</p>
+                    <a href="#features" class="btn-custom">
+                        <i class="fas fa-rocket me-2"></i>Explore Now
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-video" style="font-size: 15rem; opacity: 0.3; color: var(--primary-color);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Amazing Features</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>Unlimited Streaming</h4>
+                        <p>Watch unlimited movies and TV shows without any restrictions. Stream your favorite content anytime, anywhere.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h4>Offline Downloads</h4>
+                        <p>Download your favorite content and watch it offline. Perfect for travel or when you have limited internet connectivity.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Multi-Device Support</h4>
+                        <p>Stream on your smartphone, tablet, laptop, or smart TV. Your content syncs across all devices seamlessly.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-hd-video"></i>
+                        </div>
+                        <h4>4K Ultra HD</h4>
+                        <p>Experience crystal-clear picture quality with 4K Ultra HD streaming. Immerse yourself in stunning visuals.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Global Content</h4>
+                        <p>Access content from around the world. Discover international movies, shows, and documentaries in multiple languages.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Secure & Safe</h4>
+                        <p>Your privacy is our priority. Enjoy secure streaming with advanced encryption and no data tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in-up">
+                    <h2 class="section-title text-start">About StreamVibe</h2>
+                    <p class="lead mb-4">StreamVibe is your ultimate entertainment destination, providing access to thousands of movies, TV shows, documentaries, and live content from around the globe.</p>
+                    <p class="mb-4">Founded with the mission to make quality entertainment accessible to everyone, we've built a platform that combines cutting-edge technology with an extensive content library. Our user-friendly interface and advanced features ensure you have the best streaming experience possible.</p>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="text-primary">50K+</h3>
+                                <p>Movies & Shows</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="text-primary">1M+</h3>
+                                <p>Happy Users</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in-up">
+                    <div class="text-center">
+                        <div style="background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); padding: 60px; border-radius: 20px;">
+                            <i class="fas fa-tv" style="font-size: 8rem; color: white; opacity: 0.9;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="recommendations-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Recommended Streaming Apps</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge">HIGHLY RECOMMENDED</span>
+                        </div>
+                        <h4 class="mb-3"><a href="https://loklokmods.com/" style="color: var(--primary-color); text-decoration: none;">LokLok APK</a></h4>
+                        <p class="mb-4">One of the best free streaming apps available. <a href="https://loklokmods.com/" style="color: var(--secondary-color); text-decoration: none;">LokLok APK</a> offers an extensive library of movies and TV shows with high-quality streaming and no subscription fees.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge bg-secondary">POPULAR</span>
+                        </div>
+                        <h4 class="mb-3">Netflix</h4>
+                        <p class="mb-4">The world's leading streaming entertainment service with a vast collection of original content, movies, and TV shows across all genres.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="far fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge bg-info">TRENDING</span>
+                        </div>
+                        <h4 class="mb-3">Disney+</h4>
+                        <p class="mb-4">Stream Disney classics, Marvel movies, Star Wars saga, National Geographic documentaries, and exclusive Disney+ originals.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="far fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge bg-success">FREE</span>
+                        </div>
+                        <h4 class="mb-3">Tubi</h4>
+                        <p class="mb-4">Free streaming service with thousands of movies and TV shows. Supported by ads but completely free to use with great content variety.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="far fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge bg-warning text-dark">PREMIUM</span>
+                        </div>
+                        <h4 class="mb-3">HBO Max</h4>
+                        <p class="mb-4">Premium streaming service featuring HBO originals, blockbuster movies, exclusive series, and award-winning documentaries.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="recommendation-card fade-in-up">
+                        <div class="mb-3">
+                            <span class="badge bg-danger">LIVE TV</span>
+                        </div>
+                        <h4 class="mb-3">YouTube TV</h4>
+                        <p class="mb-4">Live TV streaming service with over 85 channels, unlimited cloud DVR, and access to YouTube Premium content.</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <i class="far fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Get In Touch</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form fade-in-up">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-4">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn-custom">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="fade-in-up">
+                        <i class="fas fa-envelope fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Email Us</h5>
+                        <p>info@streamvibe.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="fade-in-up">
+                        <i class="fas fa-phone fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Call Us</h5>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="fade-in-up">
+                        <i class="fas fa-map-marker-alt fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Visit Us</h5>
+                        <p>123 Stream Street, Digital City</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-play-circle me-2" style="font-size: 2rem; color: var(--primary-color);"></i>
+                        <h4 class="mb-0">StreamVibe</h4>
+                    </div>
+                    <p class="mt-2 mb-0">Your ultimate entertainment destination.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="social-links">
+                        <a href="#" class="me-3" style="color: var(--text-light); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="me-3" style="color: var(--text-light); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3" style="color: var(--text-light); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--text-light); font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 StreamVibe. All rights reserved. | Streaming made simple and accessible.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(26, 26, 46, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(26, 26, 46, 0.95)';
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
